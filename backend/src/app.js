@@ -1,24 +1,8 @@
-import 'dotenv';
-import express from 'express';
-import cors from 'cors';
-import routes from './routes';
+import "./database"
 
-class AppController{
-  constructor(){
-    this.server = express();
+import { ApolloServer } from "apollo-server"
 
-    this.middlewares();
-    this.routes();
-  }
+import typeDefs from './app/schemas/schemas'
+import resolvers from './resolvers'
 
-  middlewares(){
-    this.server.use(cors());
-    this.server.use(express.json());
-  }
-
-  routes(){
-    this.server.use(routes);
-  }
-}
-
-export default new AppController().server;
+module.exports = new ApolloServer({ typeDefs, resolvers })
